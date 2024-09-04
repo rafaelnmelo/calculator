@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 import {
     StyleSheet,
     Text,
     SafeAreaView
-} from "react-native";
+} from "react-native"
 
 const styles = StyleSheet.create({
     displayValue: {
