@@ -15,16 +15,18 @@ export default class App extends Component {
   state = { ...initialState }
 
   addDigit = digitTyped => {
-    //se já possuir ponto não inclui nada
-    if (digitTyped === '.' && this.state.displayValue.includes('.')) {
-      return
-    }
-
     //limpa o display se o valor no display for zero 
     //ou a propriedade clearDisplay for true
     //antes de adicionar novo digito
     const clearDisplay = this.state.displayValue === '0'
       || this.state.clearDisplay
+
+    //se já possuir ponto não inclui nada
+    if (digitTyped === '.' && !clearDisplay
+      && this.state.displayValue.includes('.')) {
+      return
+    }
+
 
     //pega o valor atual no display caso não tenha que limpar
     const currentValue = clearDisplay ? '' : this.state.displayValue
