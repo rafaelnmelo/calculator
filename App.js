@@ -48,7 +48,29 @@ export default class App extends Component {
   }
 
   setOperation = operation => {
-
+    //setar a operação mudando o estado atual para 1
+    // e marcando o display para ser limpo na proxima digitação
+    if (this.state.current === 0) {
+      this.setState({ operation, current: 1, clearDisplay: true })
+    } else {
+      //setar o resultado no indice 0 caso seja uma operação valida
+      const equals = operation === '='
+      const values = [...this.state.values]
+      try {
+        values[0] = eval(`${values[0]} ${this.state.operation} ${values[1]}`)
+      } catch (error) {
+        values[0] = this.state.values[0]
+      }
+      //atualizar todo o estado após a operação
+      values[1] = 0
+      this.setState({
+        displayValue: `${values[0]}`,
+        operation: equals ? null : operation,
+        current: equals ? 0 : 1,
+        clearDisplay: !equals,
+        values: values
+      })
+    }
   }
 
   render() {
